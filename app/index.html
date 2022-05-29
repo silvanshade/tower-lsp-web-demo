@@ -43,8 +43,8 @@
     import init, { serve } from "./dist/server.js"
     import { LspStdin, LspStdout } from "./dist/index.js"
 
-    const stdin = new LspStdin(document.getElementById("stdin"), document.getElementById("send-button"));
-    const stdout = new LspStdout(document.getElementById("stdout"));
+    const stdin = LspStdin.create(document.getElementById("stdin"), document.getElementById("send-button"));
+    const stdout = LspStdout.create(document.getElementById("stdout"));
 
     await init();
     await serve(stdin, stdout);
