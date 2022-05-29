@@ -1,9 +1,7 @@
 class LspStdin {
-  #stream: ReadableStream;
-
-  constructor(stdin: HTMLTextAreaElement, sendButton: HTMLButtonElement) {
+  static create(stdin: HTMLTextAreaElement, sendButton: HTMLButtonElement): ReadableStream {
     const encoder = new TextEncoder();
-    this.#stream = new ReadableStream({
+    return new ReadableStream({
       type: "bytes" as any,
       async start(controller) {
         while (true) {
@@ -25,18 +23,12 @@ class LspStdin {
       },
     });
   }
-
-  getReader(): ReadableStreamDefaultReader {
-    return this.#stream.getReader();
-  }
 }
 
 class LspStdout {
-  #stream: WritableStream;
-
-  constructor(stdout: HTMLTextAreaElement) {
+  static create(stdout: HTMLTextAreaElement): WritableStream {
     const decoder = new TextDecoder();
-    this.#stream = new WritableStream({
+    return new WritableStream({
       async write(bytes) {
         const message = decoder.decode(bytes);
         const payload = message.replace(/^Content-Length:\s*\d+\s*/, "");
@@ -44,10 +36,6 @@ class LspStdout {
         stdout.value += "\n";
       },
     });
-  }
-
-  getWriter(): WritableStreamDefaultWriter {
-    return this.#stream.getWriter();
   }
 }
 
