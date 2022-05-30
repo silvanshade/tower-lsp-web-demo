@@ -7,8 +7,6 @@
 
 ## Building
 
-NOTE: this example uses [ReadableByteStreamController](https://developer.mozilla.org/en-US/docs/Web/API/ReadableByteStreamController#browser_compatibility) which, as of writing this, is only supported yet on chromium based browsers.
-
 ```sh
 cargo install wasm-bindgen-cli --version 0.2.80
 cd server
