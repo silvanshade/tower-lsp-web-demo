@@ -6,8 +6,7 @@ use tower_lsp::{jsonrpc, lsp_types::*, LanguageServer, LspService, Server};
 use wasm_bindgen::{prelude::*, JsCast};
 use wasm_bindgen_futures::stream::JsStream;
 
-struct LspServer {
-}
+struct LspServer {}
 
 #[tower_lsp::async_trait]
 impl LanguageServer for LspServer {
