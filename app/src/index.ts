@@ -59,10 +59,32 @@ class LspStdout {
         const message = decoder.decode(bytes);
         const payload = message.replace(/^Content-Length:\s*\d+\s*/, "");
         stdout.value += payload;
-        stdout.value += "\n";
-      },
+        stdout.value += "\n";      },
     });
   }
 }
 
-export { LspStdin, LspStdout };
+class ServerCommand {
+  static addListener(stdin: HTMLTextAreaElement, options: HTMLSelectElement) {
+    options.addEventListener(
+      "change",
+      () => {
+        stdin.value = ServerCommand.commandFromInput(options.value);
+      }
+    )
+  }
+
+  static commandFromInput(userInput: string): string {
+    if (userInput == "initialize") {
+      return `{"jsonrpc": "2.0", "method": "initialize", "params": { "capabilities": {}}, "id": 1}`;
+    } else if (userInput == "shutdown") {
+      return `{"jsonrpc": "2.0", "method": "shutdown", "id": 2}`;
+    } else if (userInput == "exit") {
+      return `{"jsonrpc": "2.0", "method": "exit"}`;
+    } else {
+      return "";
+    }
+  }
+}
+
+export { LspStdin, LspStdout, ServerCommand };
