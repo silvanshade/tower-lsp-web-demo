@@ -8,7 +8,7 @@
 
 ## Overview
 
-[tower](https://github.com/tower-rs/tower) is a library for building network clients and servers in rust. The [tower-lsp](https://github.com/ebkalderon/tower-lsp) project implements the [Language Server Protocol](https://microsoft.github.io/language-server-protocol/), which allows you to build your own language server using `rust` and `tower`. Editors and other tools can communicate with your language server process to build features like for auto-complete, documentation on hover, and more.
+[tower](https://github.com/tower-rs/tower) is a library for building network clients and servers in rust. The [tower-lsp](https://github.com/ebkalderon/tower-lsp) project implements the [Language Server Protocol](https://microsoft.github.io/language-server-protocol/), which allows you to build your own language server using `rust` and `tower`. Editors and other tools can communicate with your language server process to build features such as auto-complete, documentation on hover, and more.
 
 By default `tower` will use the [tokio](https://tokio.rs/) library as its runtime, but you can target different backends. For `tower-lsp`, this is made possible with the [async-codec-lite](https://github.com/silvanshade/async-codec-lite) library.
 
