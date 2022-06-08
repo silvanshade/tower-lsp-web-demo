@@ -1,0 +1,47 @@
+[config]
+default_to_workspace = false
+skip_core_tasks = true
+
+[tasks.deps]
+script = '''
+cargo install wasm-bindgen-cli --version 0.2.80
+npm install
+'''
+
+[tasks.build-server]
+script = '''
+cargo build
+wasm-bindgen --keep-debug --out-dir ./packages/app/assets/wasm --target web --typescript ./target/wasm32-unknown-unknown/debug/demo_lsp_browser.wasm
+'''
+
+[tasks.build-app]
+script = '''
+npm run build --workspace=packages/app
+'''
+
+[tasks.build]
+dependencies = ["build-server", "build-app"]
+
+[tasks.clean-server]
+script = '''
+cargo clean
+'''
+
+[tasks.clean-app]
+script = '''
+rm -rf packages/app/dist
+rm -rf packages/app/assets/wasm
+'''
+
+[tasks.clean]
+dependencies = ["clean-server", "clean-app"]
+
+[tasks.format]
+script = '''
+cargo +nightly fmt --all
+'''
+
+[tasks.run]
+script = '''
+npm run app --workspace=packages/app
+'''
