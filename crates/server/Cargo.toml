@@ -1,0 +1,42 @@
+[package]
+publish = false
+edition = "2021"
+name = "demo-lsp-server"
+version = "0.0.0"
+
+[features]
+default = ["tower-lsp/runtime-agnostic"]
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+anyhow = "1.0.57"
+async-lock = "2.5.0"
+console_error_panic_hook = "0.1.7"
+dashmap = "5.3.4"
+demo-lsp-language = { version = "0.0", path = "../language" }
+futures = "0.3.21"
+js-sys = "0.3.57"
+log = "0.4"
+lsp = { version = "0.93", package = "lsp-types" }
+lsp-text = { version = "0.5", features = ["tree-sitter"] }
+ropey = "1.5.0"
+serde_json = "1.0"
+thiserror = "1.0"
+tower-lsp = { version = "0.17.0", default-features = false }
+tree-sitter = { package = "tree-sitter-facade", version = "0.4" }
+wasm-bindgen = "0.2.80"
+wasm-bindgen-futures = { version = "0.4.30", features = ["futures-core-03-stream"] }
+wasm-streams = "0.2.3"
+
+[dependencies.web-sys]
+version = "0.3.57"
+features = [
+  "console",
+  "CssStyleDeclaration",
+  "Document",
+  "ReadableStream",
+  "Window",
+  "WritableStream",
+]
