@@ -5,7 +5,3 @@ members = [
   "crates/server",
 ]
 default-members = ["crates/browser"]
-
-[patch.crates-io]
-tree-sitter-facade = { path = "../tree-sitter-facade" }
-web-tree-sitter-sys = { path = "../web-tree-sitter-sys" }
