@@ -13,4 +13,4 @@ pub async fn javascript() -> anyhow::Result<tree_sitter::Language> {
     Ok(result)
 }
 
-pub static ID: &'static str = "javascript";
+pub static ID: &str = "javascript";

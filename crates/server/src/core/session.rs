@@ -131,11 +131,11 @@ impl Session {
         use wasm_bindgen::JsCast;
         let element_id = "channel-syntax";
         let channel_syntax = web_sys::window()
-            .ok_or(anyhow!("failed to get window"))?
+            .ok_or_else(|| anyhow!("failed to get window"))?
             .document()
-            .ok_or(anyhow!("failed to get document"))?
+            .ok_or_else(|| anyhow!("failed to get document"))?
             .get_element_by_id(element_id)
-            .ok_or(anyhow!("failed to get channel-syntax element"))?
+            .ok_or_else(|| anyhow!("failed to get channel-syntax element"))?
             .unchecked_into();
         Ok(channel_syntax)
     }

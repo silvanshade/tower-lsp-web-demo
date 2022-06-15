@@ -29,7 +29,7 @@ fn format_sexp_indented(sexp: impl AsRef<str>, initial_indent_level: u32) -> Str
                 has_field = false;
             } else {
                 if indent_level > 0 {
-                    writeln!(formatted, "").unwrap();
+                    writeln!(formatted).unwrap();
                     for _ in 0 .. indent_level {
                         write!(formatted, "  ").unwrap();
                     }
@@ -52,7 +52,7 @@ fn format_sexp_indented(sexp: impl AsRef<str>, initial_indent_level: u32) -> Str
             }
         } else if s.ends_with(':') {
             // "field:"
-            writeln!(formatted, "").unwrap();
+            writeln!(formatted).unwrap();
             for _ in 0 .. indent_level {
                 write!(formatted, "  ").unwrap();
             }
