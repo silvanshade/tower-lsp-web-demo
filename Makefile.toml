@@ -10,8 +10,8 @@ npm install
 
 [tasks.build-server]
 script = '''
-cargo build
-wasm-bindgen --keep-debug --out-dir ./packages/app/assets/wasm --target web --typescript ./target/wasm32-unknown-unknown/debug/demo_lsp_browser.wasm
+cargo build --release
+wasm-bindgen --out-dir ./packages/app/assets/wasm --target web --typescript ./target/wasm32-unknown-unknown/release/demo_lsp_browser.wasm
 '''
 
 [tasks.build-app]
