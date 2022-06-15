@@ -12,7 +12,7 @@ const config = {
   experiments: {
     asyncWebAssembly: true,
   },
-  mode: "development",
+  mode: "production",
   target: "web",
   entry: {
     app: "./src/index.ts",
