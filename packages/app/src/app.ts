@@ -35,10 +35,9 @@ export default class App {
     const value = `
 function foo() {
 }
-function bar() {
-}
-function baz() {
-}
+const bar = 42;
+var baz;
+class Qux {}
 `.replace(/^\s*\n/gm, "");
     const id = language.id;
     const uri = monaco.Uri.parse("inmemory://demo.js");
