@@ -5,6 +5,12 @@
   </p>
 </div>
 
+## Demo
+
+You can experiment with a live demo of the example server integrated with an in-browser editor here:
+
+https://silvanshade.github.io/tower-lsp-web-demo/
+
 ## Building
 
 ```sh
