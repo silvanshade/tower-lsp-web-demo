@@ -60,7 +60,7 @@ function baz() {
             },
           ],
         } as proto.DidChangeTextDocumentParams);
-      }, 400),
+      }, 200),
     );
 
     // eslint-disable-next-line @typescript-eslint/require-await
