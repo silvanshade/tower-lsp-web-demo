@@ -4,7 +4,6 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
-const TerserPlugin = require("terser-webpack-plugin");
 const webpack = require("webpack");
 
 /** @type {import("webpack").Configuration & { devServer?: import("webpack-dev-server").Configuration } } */
@@ -74,18 +73,7 @@ const config = {
     }),
   ],
   optimization: {
-    minimize: true,
-    minimizer: [
-      new TerserPlugin({
-        terserOptions: {
-          format: {
-            comments: false,
-          },
-          compress: true,
-          // sourceMap: true,
-        },
-      }),
-    ],
+    minimize: false,
   },
   performance: {
     hints: false,
