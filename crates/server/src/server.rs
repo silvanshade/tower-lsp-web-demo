@@ -81,46 +81,8 @@ impl LanguageServer for Server {
         params: lsp::DocumentSymbolParams,
     ) -> jsonrpc::Result<Option<lsp::DocumentSymbolResponse>> {
         web_sys::console::log_1(&"server::document_symbol".into());
-        let _params = params;
-        let _session = self.session.clone();
-        let uri = lsp::Url::parse("inmemory://model.fs").expect("failed to parse url");
-        Ok(Some(lsp::DocumentSymbolResponse::Flat(vec![
-            #[allow(deprecated)]
-            lsp::SymbolInformation {
-                name: "foo".into(),
-                kind: lsp::SymbolKind::FUNCTION,
-                tags: Default::default(),
-                deprecated: Default::default(),
-                location: lsp::Location {
-                    range: lsp::Range::new(lsp::Position::new(0, 0), lsp::Position::new(1, 1)),
-                    uri: uri.clone(),
-                },
-                container_name: Default::default(),
-            },
-            #[allow(deprecated)]
-            lsp::SymbolInformation {
-                name: "bar".into(),
-                kind: lsp::SymbolKind::FUNCTION,
-                tags: Default::default(),
-                deprecated: Default::default(),
-                location: lsp::Location {
-                    range: lsp::Range::new(lsp::Position::new(2, 0), lsp::Position::new(3, 1)),
-                    uri: uri.clone(),
-                },
-                container_name: Default::default(),
-            },
-            #[allow(deprecated)]
-            lsp::SymbolInformation {
-                name: "baz".into(),
-                kind: lsp::SymbolKind::FUNCTION,
-                tags: Default::default(),
-                deprecated: Default::default(),
-                location: lsp::Location {
-                    range: lsp::Range::new(lsp::Position::new(4, 0), lsp::Position::new(5, 1)),
-                    uri: uri.clone(),
-                },
-                container_name: Default::default(),
-            },
-        ])))
+        let session = self.session.clone();
+        let result = crate::handler::text_document::document_symbol(session, params).await;
+        Ok(result.map_err(crate::core::IntoJsonRpcError)?)
     }
 }
