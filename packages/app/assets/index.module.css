@@ -15,8 +15,10 @@ body {
 
 div[id=container] {
   display: grid;
-  height: 90%;
   width: 75%;
+  height: 90%;
+  min-width: 800px;
+  min-height: 600px;
   grid-template-rows: auto auto auto minmax(0, 1fr) auto auto auto;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   margin: auto;
