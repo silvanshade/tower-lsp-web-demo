@@ -73,7 +73,7 @@ const config = {
     }),
   ],
   optimization: {
-    minimize: false,
+    minimize: true,
   },
   performance: {
     hints: false,
