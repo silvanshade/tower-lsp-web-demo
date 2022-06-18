@@ -128,6 +128,7 @@ export class StreamDemuxer extends Queue<Uint8Array> {
     this.#start = this.start();
   }
 
+  // FIXME: we needs to actually do framed reads here since `bytes` may not be a complete message
   private async start(): Promise<void> {
     for await (const bytes of this) {
       const delimited = Bytes.decode(bytes);
