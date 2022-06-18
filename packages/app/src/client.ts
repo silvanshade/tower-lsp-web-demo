@@ -66,8 +66,8 @@ export default class Client extends jsrpc.JSONRPCServerAndClient {
     // notify "initialized": client --> server
     this.notify(proto.InitializedNotification.type.method, {});
 
-    await Promise.allSettled(this.afterInitializedHooks.map((f: () => Promise<void>) => f()));
-    await Promise.allSettled([this.processNotifications(), this.processRequests()]);
+    await Promise.all(this.afterInitializedHooks.map((f: () => Promise<void>) => f()));
+    await Promise.all([this.processNotifications(), this.processRequests()]);
   }
 
   // eslint-disable-next-line @typescript-eslint/require-await
