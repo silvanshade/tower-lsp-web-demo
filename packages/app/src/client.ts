@@ -1,23 +1,9 @@
 import * as jsrpc from "json-rpc-2.0";
 import * as proto from "vscode-languageserver-protocol";
 
-import { Bytes, FromServer, Headers, IntoServer } from "./codec";
+import { Codec, FromServer, IntoServer } from "./codec";
 
 const consoleChannel = document.getElementById("channel-console") as HTMLTextAreaElement;
-
-class Codec {
-  static encode(json: jsrpc.JSONRPCRequest | jsrpc.JSONRPCResponse): Uint8Array {
-    const message = JSON.stringify(json);
-    const delimited = Headers.add(message);
-    return Bytes.encode(delimited);
-  }
-
-  static decode<T>(data: Uint8Array): T {
-    const delimited = Bytes.decode(data);
-    const message = Headers.remove(delimited);
-    return JSON.parse(message) as T;
-  }
-}
 
 export default class Client extends jsrpc.JSONRPCServerAndClient {
   afterInitializedHooks: (() => Promise<void>)[] = [];
