@@ -96,9 +96,7 @@ export namespace PromiseMap {
 // FIXME: tracing effiency
 export class IntoServer extends Queue<Uint8Array> implements AsyncGenerator<Uint8Array, never, void> {
   enqueue(item: Uint8Array): void {
-    const delimited = decoder.decode(item);
-    const message = Headers.remove(delimited);
-    Tracer.client(message);
+    Tracer.client(Headers.remove(decoder.decode(item)));
     super.enqueue(item);
   }
 }
