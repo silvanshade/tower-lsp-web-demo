@@ -25,7 +25,6 @@ export default class Client extends jsrpc.JSONRPCServerAndClient {
     this.#fromServer = fromServer;
   }
 
-  // eslint-disable-next-line @typescript-eslint/require-await
   async start(): Promise<void> {
     // process "window/logMessage": client <- server
     this.addMethod(proto.LogMessageNotification.type.method, (params) => {
@@ -70,7 +69,6 @@ export default class Client extends jsrpc.JSONRPCServerAndClient {
     await Promise.all([this.processNotifications(), this.processRequests()]);
   }
 
-  // eslint-disable-next-line @typescript-eslint/require-await
   async processNotifications(): Promise<void> {
     for await (const notification of this.#fromServer.notifications) {
       await this.receiveAndSend(notification);
