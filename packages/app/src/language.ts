@@ -5,8 +5,8 @@ import * as proto from "vscode-languageserver-protocol";
 
 import Client from "./client";
 
-const monacoToProtocol = new MonacoToProtocolConverter(monaco);
-const protocolToMonaco = new ProtocolToMonacoConverter(monaco);
+export const monacoToProtocol = new MonacoToProtocolConverter(monaco);
+export const protocolToMonaco = new ProtocolToMonacoConverter(monaco);
 
 let language: null | Language;
 
