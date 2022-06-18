@@ -64,7 +64,7 @@ packages
         ├── codec             -- definitions for encoding and decoding/demuxing messages between the client and server
         │   ├── bytes.ts      -- utilities for working with Uint8Array
         │   ├── demuxer.ts    -- demuxer for splitting output from server into streams of notifications, requests, and responses
-        │   ├── headers.ts    -- utility for working with http headers
+        │   ├── headers.ts    -- utilities for working with http headers
         │   ├── map.ts        -- map for storing responses from server yet to be processed (fed by demuxer)
         │   └── queue.ts      -- promise based queue used for storing notifications and requests
         ├── index.ts
