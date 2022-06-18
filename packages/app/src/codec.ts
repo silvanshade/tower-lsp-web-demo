@@ -1,3 +1,4 @@
+import * as jsrpc from "json-rpc-2.0";
 import * as vsrpc from "vscode-jsonrpc";
 
 import Queue from "./queue";
@@ -5,6 +6,20 @@ import Tracer from "./tracer";
 
 const encoder = new TextEncoder();
 const decoder = new TextDecoder();
+
+export class Codec {
+  static encode(json: jsrpc.JSONRPCRequest | jsrpc.JSONRPCResponse): Uint8Array {
+    const message = JSON.stringify(json);
+    const delimited = Headers.add(message);
+    return Bytes.encode(delimited);
+  }
+
+  static decode<T>(data: Uint8Array): T {
+    const delimited = Bytes.decode(data);
+    const message = Headers.remove(delimited);
+    return JSON.parse(message) as T;
+  }
+}
 
 export class Bytes {
   static encode(input: string): Uint8Array {
@@ -44,10 +59,10 @@ export class Headers {
 }
 
 export class PromiseMap<K, V extends { toString(): string }> {
-  #map: Map<K, PromiseMap.type<V>> = new Map();
+  #map: Map<K, PromiseMap.Entry<V>> = new Map();
 
   get(key: K & { toString(): string }): null | Promise<V> {
-    let initialized: PromiseMap.type<V>;
+    let initialized: PromiseMap.Entry<V>;
     // if the entry doesn't exist, set it
     if (!this.#map.has(key)) {
       initialized = this.#set(key);
@@ -65,7 +80,7 @@ export class PromiseMap<K, V extends { toString(): string }> {
     }
   }
 
-  #set(key: K, value?: V): PromiseMap.type<V> {
+  #set(key: K, value?: V): PromiseMap.Entry<V> {
     if (this.#map.has(key)) {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       return this.#map.get(key)!;
@@ -79,7 +94,7 @@ export class PromiseMap<K, V extends { toString(): string }> {
       resolve = resolver;
     });
     // the initialized entry
-    const initialized: PromiseMap.type<V> = { status: "pending", resolve, promise };
+    const initialized: PromiseMap.Entry<V> = { status: "pending", resolve, promise };
     if (null != value) {
       initialized.resolve(value);
     }
@@ -107,7 +122,9 @@ export class PromiseMap<K, V extends { toString(): string }> {
 
 // eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace PromiseMap {
-  export type type<V> = { status: "pending"; resolve: (item: V) => void; promise: Promise<V> } | { status: "resolved" };
+  export type Entry<V> =
+    | { status: "pending"; resolve: (item: V) => void; promise: Promise<V> }
+    | { status: "resolved" };
 }
 
 // FIXME: tracing effiency
