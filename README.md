@@ -42,7 +42,7 @@ crates
 └── server
     └── src
         ├── core
-        │   ├── document.rs   -- definitions related to working with documents related data
+        │   ├── document.rs   -- definitions for working with document related data
         │   ├── error.rs
         │   ├── session.rs    -- definitions for lsp session and related state
         │   ├── syntax.rs     -- definitions for updating syntax text area in browser
