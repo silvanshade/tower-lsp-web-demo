@@ -17,7 +17,6 @@ export default class StreamDemuxer extends Queue<Uint8Array> {
     this.#start = this.start();
   }
 
-  // FIXME: we needs to actually do framed reads here since `bytes` may not be a complete message
   private async start(): Promise<void> {
     let contentLength: null | number = null;
     let buffer = new Uint8Array();
