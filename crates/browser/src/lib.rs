@@ -4,7 +4,7 @@
 use futures::stream::TryStreamExt;
 use tower_lsp::{LspService, Server};
 use wasm_bindgen::{prelude::*, JsCast};
-use wasm_bindgen_futures::{stream::JsStream, JsFuture};
+use wasm_bindgen_futures::stream::JsStream;
 
 #[wasm_bindgen]
 pub struct ServerConfig {
@@ -39,10 +39,8 @@ pub async fn serve(config: ServerConfig) -> Result<(), JsValue> {
         from_server,
     } = config;
 
+    tree_sitter::TreeSitter::init().await?;
     let language = demo_lsp_language::language::javascript().await.unwrap();
-    JsFuture::from(web_tree_sitter_sys::Parser::init())
-        .await
-        .expect("failed to initialize tree-sitter");
 
     let input = JsStream::from(into_server);
     let input = input
