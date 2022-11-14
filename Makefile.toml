@@ -19,6 +19,12 @@ script = '''
 npm run build --workspace=packages/app
 '''
 
+[tasks.build-app-vscode]
+dependencies = ["build-server"]
+script = '''
+npm run compile-web --workspace=packages/app-vscode
+'''
+
 [tasks.build]
 dependencies = ["build-server", "build-app"]
 
@@ -44,4 +50,10 @@ cargo +nightly fmt --all
 [tasks.run]
 script = '''
 npm run app --workspace=packages/app
+'''
+
+[tasks.run-app-vscode]
+dependencies = ["build-app-vscode"]
+script = '''
+npm run run-in-browser --workspace=packages/app-vscode
 '''

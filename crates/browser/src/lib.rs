@@ -62,3 +62,8 @@ pub async fn serve(config: ServerConfig) -> Result<(), JsValue> {
 
     Ok(())
 }
+
+#[wasm_bindgen]
+pub fn greet() -> String {
+    "Hello, world!".to_string()
+}

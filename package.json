@@ -1,7 +1,8 @@
 {
   "private": true,
   "workspaces": [
-    "packages/app"
+    "packages/app",
+    "packages/app-vscode"
   ],
   "dependencies": {
     "tree-sitter-javascript": "^0.19.0",
