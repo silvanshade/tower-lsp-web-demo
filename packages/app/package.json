@@ -3,7 +3,7 @@
   "name": "monaco-lsp-streams",
   "description": "",
   "version": "0.0.0",
-  "license": "Apache-2.0 WITH LLVM-exception",
+  "license": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
   "author": {
     "name": "silvanshade",
     "email": "silvanshade@users.noreply.github.com",
